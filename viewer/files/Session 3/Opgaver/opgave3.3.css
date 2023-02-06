@@ -1,13 +1,12 @@
 #container {
     float: left;
-    margin: 50px auto;
+    margin: auto;
     padding: 10px auto;
-    width: 49%;
 
     display: inline-grid;
     grid-template-columns: auto 400px;
-    grid-template-rows: 200px 200px auto;
-    grid-gap: 50px;
+    grid-template-rows: 120px 120px auto;
+    grid-gap: 60px;
 
     font-size: large;
 }
@@ -29,8 +28,8 @@ img {
     max-width: 125px;
 }
 
-@media screen and (max-width: 700px) {
-    .container {
-        width:100%;
+@media screen and (max-width: 500px) {
+    #container {
+        grid-template-columns: auto;
     }
 }

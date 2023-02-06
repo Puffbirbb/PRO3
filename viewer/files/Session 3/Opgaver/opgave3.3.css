@@ -1,0 +1,8 @@
+#container {
+    margin: 25px auto;
+    padding: 10px;
+
+    display: inline-grid;
+    grid-template-columns: auto 400px;
+    grid-template-rows: 200px 200px auto;
+}

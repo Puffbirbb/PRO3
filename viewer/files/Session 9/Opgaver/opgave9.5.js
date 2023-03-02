@@ -14,7 +14,7 @@ function Subject() {
 
 function Observer() {
     this.notify = function(data) {
-        console.log('Recieved notification: ', data);
+        console.log('Recieved notification:', data);
     }
 }
 

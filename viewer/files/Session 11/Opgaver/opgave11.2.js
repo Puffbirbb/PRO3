@@ -85,7 +85,7 @@ document.addEventListener('click', async event => {
     }
 });
 
-// when user clicks a user already cliked, remove the table
+// when user clicks a user already clicked, remove the table
 document.addEventListener('click', event => {
     const target = event.target;
     if (target.tagName === 'TD') {

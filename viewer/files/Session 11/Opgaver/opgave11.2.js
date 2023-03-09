@@ -37,19 +37,62 @@ async function createTable() {
 createTable();
 
 // when user clicks on a user, show the posts
+// document.addEventListener('click', async event => {
+//     const target = event.target;
+//     if (target.tagName === 'TD') {
+//         if (target.disabled) return;
+//         const posts = await get(postUrl + target.nextSibling.textContent);
+//         const ul = document.createElement('ul');
+//         posts.forEach(post => {
+//             const li = document.createElement('li');
+//             li.textContent = post.title;
+//             ul.appendChild(li);
+//         });
+//         target.appendChild(ul);
+//         target.style.backgroundColor = 'lightblue';
+//         target.disabled = true;
+//     }
+// });
+
+//when user clicks on a user, create table at the bottom of the page with the posts
 document.addEventListener('click', async event => {
     const target = event.target;
     if (target.tagName === 'TD') {
         if (target.disabled) return;
         const posts = await get(postUrl + target.nextSibling.textContent);
-        const ul = document.createElement('ul');
+        const table = document.createElement('table');
+        const tr = document.createElement('tr');
+        const th1 = document.createElement('th');
+        const th2 = document.createElement('th');
+        th1.textContent = 'Title';
+        th2.textContent = 'Body';
+        tr.appendChild(th1);
+        tr.appendChild(th2);
+        table.appendChild(tr);
         posts.forEach(post => {
-            const li = document.createElement('li');
-            li.textContent = post.title;
-            ul.appendChild(li);
+            const tr = document.createElement('tr');
+            const td1 = document.createElement('td');
+            const td2 = document.createElement('td');
+            td1.textContent = post.title;
+            td2.textContent = post.body;
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            table.appendChild(tr);
         });
-        target.appendChild(ul);
+        document.body.appendChild(table);
         target.style.backgroundColor = 'lightblue';
         target.disabled = true;
+    }
+});
+
+// when user clicks a user already cliked, remove the table
+document.addEventListener('click', event => {
+    const target = event.target;
+    if (target.tagName === 'TD') {
+        if (target.disabled) {
+            document.body.removeChild(document.body.lastChild);
+            target.style.backgroundColor = 'white';
+            target.disabled = false;
+        }
     }
 });

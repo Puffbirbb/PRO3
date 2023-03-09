@@ -62,3 +62,5 @@ suiGang.delete(p1);
 console.log(suiGang.group.toString());
 
 console.log(p1.group.toString());
+
+console.log(suiGang.has(p1));

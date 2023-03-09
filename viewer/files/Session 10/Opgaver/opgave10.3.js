@@ -18,3 +18,13 @@ class StringStack {
         return this.stack.length;
     }
 }
+
+let ss = new StringStack();
+
+ss.push("a");
+
+ss.push("b");
+
+ss.push("c");
+
+console.log(ss.peek());

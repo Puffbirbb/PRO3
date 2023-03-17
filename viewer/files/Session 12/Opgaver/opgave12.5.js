@@ -40,10 +40,11 @@ function newQuotes() {
             tquote.remove();
             console.log(i);
         }
-        // removeChildren(document.body);
         getTrump();
     }
     document.body.append(newTrumpQuote);
 }
 
 newQuotes();
+
+console.log(post(trumpURL, get(trumpURL)));

@@ -1,0 +1,84 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#chat-container {
+  margin: 0 auto;
+  max-width: 600px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#delete-knap {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#rum-dropdown {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#beskeder-liste {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#beskeder-liste li {
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+#besked-input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#besked-input {
+  flex-grow: 1;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#send-besked-knap {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#send-besked-knap:hover {
+  background-color: #3e8e41;
+}

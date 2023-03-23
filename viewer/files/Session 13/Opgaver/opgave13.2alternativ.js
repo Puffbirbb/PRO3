@@ -37,12 +37,22 @@ function chatRoomMessages(chatRoom) {
   get(chatSearch + chatRoom)
     .then((response) => {
       const chatMessages = JSON.parse(response);
-      const chatMessageList = document.getElementById("beskeder-liste");
+      const chatMessageList = document.getElementById("chatroom-messages");
       chatMessageList.innerHTML = "";
       chatMessages.forEach((chatMessage) => {
-        const li = document.createElement("li");
-        li.textContent = chatMessage.id + " " + chatMessage.tekst;
-        chatMessageList.appendChild(li);
+        const div = document.createElement("div");
+        const p = document.createElement("p");
+        const span = document.createElement("span");
+        p.textContent = chatMessage.tekst;
+        p.id = "message-text";
+        span.textContent = chatMessage.id;
+        span.id = "message-id";
+        div.className = "message incoming";
+        div.id = "message-div";
+        span.className = "message-id";
+        div.appendChild(p);
+        div.appendChild(span);
+        chatMessageList.appendChild(div);
       });
     })
     .catch((error) => console.log(error));
@@ -52,7 +62,7 @@ function chatRooms() {
   get(chatRoom)
     .then((response) => {
       const chatRooms = JSON.parse(response);
-      const dropdown = document.getElementById("rum-dropdown");
+      const dropdown = document.getElementById("chatroom-dropdown");
       chatRooms.forEach((chatRoom) => {
         const option = document.createElement("option");
         option.value = chatRoom.navn;
@@ -67,48 +77,43 @@ chatRooms();
 
 chatRoomMessages("Rum1");
 
-document.getElementById("rum-dropdown").onchange = (event) => {
+document.getElementById("chatroom-dropdown").onchange = (event) => {
   chatRoomMessages(event.target.value);
 };
 
-document.getElementById("send-besked-knap").onclick = () => {
+document.getElementById("message-input-button").onclick = () => {
   const chatMessage = {
-    chatRum: document.getElementById("rum-dropdown").value,
-    tekst: document.getElementById("besked-input").value,
+    chatRum: document.getElementById("chatroom-dropdown").value,
+    tekst: document.getElementById("message-input").value,
   };
   post(chatSite, chatMessage)
     .then(() => {
       chatRoomMessages(chatMessage.chatRum);
-      getElementById("besked-input").value = "";
+      getElementById("message-input").value = "";
     })
     .catch((error) => console.log(error));
 };
 
-document.getElementById("beskeder-liste").onclick = (event) => {
-  const selectedMessage = event.target;
-  selectedMessage.style.backgroundColor = "red";
-  selectedMessage.style.color = "white";
-  const allMessages = document.querySelectorAll("#beskeder-liste li");
-  allMessages.forEach((message) => {
-    if (message !== selectedMessage) {
-      message.style.backgroundColor = "white";
-      message.style.color = "black";
-    }
-  });
-  document.getElementById("delete-knap").onclick = () => {
-    const id = selectedMessage.textContent.split(" ")[0];
-    if (
-      confirm("Er du sikker på at du vil slette beskeden " + id + "?") === true
-    ) {
-      deleteMessage(chatSite + id)
-        .then(() => {
-          chatRoomMessages(document.getElementById("rum-dropdown").value);
-        })
-        .catch((error) => console.log(error));
-    } else {
-      selectedMessage.style.backgroundColor = "white";
+// onclick for message paragraph that changes the message and the span color to red
+document.getElementById("chatroom-messages").onclick = (event) => {
+  if (event.target.id === "message-text") {
+    event.target.style.color = "red";
+    event.target.nextSibling.style.color = "red";
+  }
+  document.getElementById("chatroom-messages").onclick = (event) => {
+    if (event.target.id === "message-text") {
+      if (confirm("Do you want to delete this message?")) {
+        deleteMessage(chatSite + event.target.nextSibling.textContent)
+          .then(() => {
+            chatRoomMessages(
+              document.getElementById("chatroom-dropdown").value
+            );
+          })
+          .catch((error) => console.log(error));
+      } else {
+        event.target.style.color = "black";
+        event.target.nextSibling.style.color = "#999";
+      }
     }
   };
 };
-
-document.getElementById("send-besked-knap").on;

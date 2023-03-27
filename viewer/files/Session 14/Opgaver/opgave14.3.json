@@ -1,0 +1,56 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "johndoe",
+      "password": "p@ssw0rd",
+      "email": "johndoe@example.com"
+    },
+    {
+      "id": 2,
+      "username": "janedoe",
+      "password": "password123",
+      "email": "janedoe@example.com"
+    }
+  ],
+  "chat_rooms": [
+    {
+      "id": 1,
+      "name": "General",
+      "users": [1, 2],
+      "messages": [
+        {
+          "id": 1,
+          "sender_id": 1,
+          "timestamp": "2023-03-23T12:00:00Z",
+          "content": "Hello, world!"
+        },
+        {
+          "id": 2,
+          "sender_id": 2,
+          "timestamp": "2023-03-23T12:01:00Z",
+          "content": "Hi there!"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Marketing",
+      "users": [1],
+      "messages": [
+        {
+          "id": 3,
+          "sender_id": 1,
+          "timestamp": "2023-03-23T12:02:00Z",
+          "content": "What are our marketing goals for this quarter?"
+        },
+        {
+          "id": 4,
+          "sender_id": 1,
+          "timestamp": "2023-03-23T12:03:00Z",
+          "content": "Anyone have any ideas?"
+        }
+      ]
+    }
+  ]
+}

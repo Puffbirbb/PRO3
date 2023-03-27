@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title Opgave 15.1
+    script(type='opgave15.3.mjs')
+    style(type='text/css').
+        table, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        tr, td {
+            padding: 5px;
+        }
+    body
+        h1 Opgave 15.1
+        if users != null
+            table
+                each user in users.results
+                    tr
+                        td Velkommen #{user.name.first} Du bor i #{user.location.city} Din Email er #{user.email}
+        else
+            p Du er ikke logget ind

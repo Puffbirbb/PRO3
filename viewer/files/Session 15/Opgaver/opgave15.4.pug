@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title Opgave 15.1
+    script(type='opgave15.4.mjs')
+    body
+        h1 Opgave 15.1
+        if useres.length > 9 && useres.length < 101
+            ul
+            each user in useres
+                if user.nationality != 'DK'
+                    li Velkommen #{user.name}
+                    li Du er #{user.age} år gammel
+                    li Din Email er #{user.email}
+                    li Du er ikke dansk
+                else 
+                    li Velkommen #{user.name}
+                    li Du er #{user.age} år gammel
+                    li Din Email er #{user.email}
+                    li Du er dansk
+        else
+            p No Users Can Be Shown; Either Too Few Or Too Many

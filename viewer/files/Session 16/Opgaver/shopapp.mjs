@@ -30,6 +30,30 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.post("/login", (request, response) => {
+  const { navn, password } = request.body;
+  if (password === "111" && navn) {
+    request.session.navn = navn;
+    response.status(201).send(["login ok!"]);
+  } else {
+    response.sendStatus(401);
+  }
+});
+
+app.get('/index', (request, response) => {
+  const navn = request.session.navn;
+  if (navn != null) {
+      let cart = request.session.cart;
+      if (cart == undefined) {
+        cart = [];
+      }
+      let data = { navn : navn, shopItems: shopItems, cart: cart };
+      response.render("index", data); 
+  } else {
+      response.redirect('/ungrantedAccess.html');
+  }
+});
+
 const shopItems = [
   { id: 1, name: "Banan", price: 10 },
   { id: 2, name: "Æble", price: 20 },
@@ -49,13 +73,14 @@ app.post("/tilfoej", (request, response) => {
   response.status(201).send(["added"]);
 });
 
-app.get("/index", (request, response) => {
-  let cart = request.session.cart;
-  if (cart == undefined) {
-    cart = [];
-  }
-  let data = { shopItems: shopItems, cart: cart };
-  response.render("index", data);
+app.get("/logout", (request, response) => {
+  request.session.destroy((err) => {  
+    if (err) {
+      console.log(err);
+    } else {
+      response.redirect("/");
+    }
+  });
 });
 
 app.listen(4206);

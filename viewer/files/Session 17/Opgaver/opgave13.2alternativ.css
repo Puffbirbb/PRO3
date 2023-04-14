@@ -1,0 +1,94 @@
+/* Set up the basic container and header */
+.chatroom-container {
+  background-color: #f2f2f2;
+  width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.chatroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f51b5;
+  color: #fff;
+  padding: 10px;
+}
+
+.chatroom-header h2 {
+  margin: 0;
+}
+
+.chatroom-dropdown {
+  margin-left: 10px;
+}
+
+.chatroom-dropdown select {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+  color: #3f51b5;
+}
+
+/* Style the messages and input box */
+.chatroom-messages {
+  padding: 10px;
+  height: 250px;
+  overflow-y: scroll;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  max-width: 80%;
+}
+
+.message p {
+  padding: 10px;
+  margin: 0;
+  border-radius: 10px;
+}
+
+.message incoming {
+  align-self: flex-start;
+  background-color: #fff;
+}
+
+.message outgoing {
+  align-self: flex-end;
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+.message-id {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+  align-self: flex-end;
+}
+
+.chatroom-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.chatroom-input input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+.chatroom-input button {
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}

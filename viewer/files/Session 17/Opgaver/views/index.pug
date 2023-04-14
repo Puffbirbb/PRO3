@@ -1,0 +1,49 @@
+html
+    script. 
+        async function getMessages() {
+            let room = document.getElementById("chatroom-dropdown").value;
+            const respons = await fetch('http://localhost:4206/messageRoom/', {
+                method: "POST",
+                body: JSON.stringify({
+                    room: room
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }   
+            });
+            if (respons.status !== 200)
+                throw new Error(respons.status);
+            let messages = await respons.json();
+            showMessages(messages);
+        }
+        function showMessages(messages) {
+            let chatroomMessages = document.getElementById("chatroom-messages");
+            chatroomMessages.innerHTML = "";
+            messages.forEach(message => {
+                let p = document.createElement("p");
+                p.classList.add("chatroom-message");
+                p.style.padding = "10px";
+                p.style.margin = "0";
+                p.style.borderRadius = "10px";
+                p.style.backgroundColor = "#fff";
+                p.style.color = "#3f51b5";
+                p.innerHTML = message.tekst + " " + message.afsender;
+                chatroomMessages.appendChild(p);
+            });
+        }
+    head
+        title ChatRoom
+    body
+        div.chatroom-container(style='background-color: #f2f2f2; width: 400px; border-radius: 10px; overflow: hidden; font-family: Arial, sans-serif;')
+            div.chatroom-header(style='display: flex; justify-content: space-between; align-items: center; background-color: #3f51b5; color: #fff; padding: 10px;')
+                h2(style='margin: 0;') Chatroom
+                div.chatroom-dropdown(style='margin-left: 10px;')
+                    select#chatroom-dropdown(onchange = "JavaScript:getMessages()" ,style='padding: 5px; border-radius: 5px; border: none; background-color: #fff; color: #3f51b5;')
+                        each chatroom in rooms
+                            option=chatroom.navn
+            div.chatroom-messages#chatroom-messages(style='padding: 10px; height: 250px; overflow-y: scroll;')
+                each message in messages
+                    p.chatroom-message(style='padding: 10px; margin: 0; border-radius: 10px;') #{message.tekst} #{message.afsender}
+            div.chatroom-input(style='display: flex; align-items: center; padding: 10px;')
+                input(type='text', id='message-input', placeholder='Type a message...', style='flex-grow: 1; padding: 10px; border-radius: 5px; border: none; margin-right: 10px;')
+                button#message-input-button(type='submit', style='background-color: #3f51b5; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;') Send

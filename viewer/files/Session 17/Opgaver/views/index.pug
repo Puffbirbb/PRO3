@@ -1,5 +1,5 @@
 html
-    script. 
+    script.
         async function getMessages() {
             let room = document.getElementById("chatroom-dropdown").value;
             const respons = await fetch('http://localhost:4206/messageRoom/', {
@@ -46,4 +46,4 @@ html
                     p.chatroom-message(style='padding: 10px; margin: 0; border-radius: 10px;') #{message.tekst} #{message.afsender}
             div.chatroom-input(style='display: flex; align-items: center; padding: 10px;')
                 input(type='text', id='message-input', placeholder='Type a message...', style='flex-grow: 1; padding: 10px; border-radius: 5px; border: none; margin-right: 10px;')
-                button#message-input-button(type='submit', style='background-color: #3f51b5; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;') Send
+                button#message-input-button(onclick = "JavaScript:getMessages()", type='submit', style='background-color: #3f51b5; color: #fff; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;') Send

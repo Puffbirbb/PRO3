@@ -69,6 +69,10 @@ let chatRum = [{ navn: "rum1" }, { navn: "rum2" }];
 //   addDoc(collection(db, "messages"), beskeder[i]);
 // }
 
+async function addMessage(message) {
+  await addDoc(collection(db, "messages"), message);
+}
+
 async function getMessages(room) {
   let messageCol = collection(db, "messages");
   let q = query(messageCol, where("chatrum", "==", room));
@@ -103,6 +107,12 @@ exp_app.get("/", async (req, res) => {
 
 exp_app.post("/messageRoom", async (req, res) => {
   let messages = await getMessages(req.body.room);
+  res.send(messages);
+});
+
+exp_app.post("/message", async (req, res) => {
+  let messages = await getMessages(req.body.room);
+  await addMessage(req.body);
   res.send(messages);
 });
 
